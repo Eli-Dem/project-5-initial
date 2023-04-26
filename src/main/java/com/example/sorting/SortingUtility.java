@@ -2,6 +2,7 @@ package com.example.sorting;
 
 public class SortingUtility {
 
+
     /**
      * Part A Gnome Sort Algorithm
      * <p>
@@ -23,9 +24,15 @@ public class SortingUtility {
      * @see <a href="https://en.wikipedia.org/wiki/Gnome_sort">https://en.wikipedia.org/wiki/Gnome_sort</a>
      */
     public static <T extends Comparable<T>> void gnomeSort(T[] data) {
-
-        // TODO implement pseudocode above
-
+        int pos = 0;
+        while(pos < data.length){
+            if(pos == 0 || data[pos].compareTo(data[pos - 1]) >= 0) { //checks to see if we are either at the start of
+                pos++;                                               // the array, or if the value at the current position is greater than the one behind it
+            } else{
+                swap(data, pos, pos - 1);  //swaps the values at the current position and moves back one position
+                pos--;
+            }
+        }
     }
 
     /**
@@ -44,9 +51,9 @@ public class SortingUtility {
      * @see <a href="https://en.wikipedia.org/wiki/Gnome_sort">https://en.wikipedia.org/wiki/Gnome_sort</a>
      */
     public static <T extends Comparable<T>> void gnomierSort(T[] data) {
-
-        // TODO implement pseudocode above
-
+        for(int pos = 1; pos < data.length; pos++){
+            gnomierSort(data, pos);
+        }
     }
 
     /**
@@ -66,8 +73,11 @@ public class SortingUtility {
      * @param <T>
      */
     private static <T extends Comparable<T>> void gnomierSort(T[] data, int upperBound) {
-
-        // TODO implement pseudocode above
+        int pos = upperBound;
+        while(pos > 0 && data[pos - 1].compareTo(data[pos]) > 0){ //compares the data behind the current position and swaps
+            swap(data, pos - 1, pos);
+            pos--;
+        }
     }
 
     private static <T extends Comparable<T>> void swap(T[] data, int index1, int index2) {
